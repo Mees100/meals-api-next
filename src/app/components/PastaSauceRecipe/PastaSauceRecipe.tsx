@@ -13,7 +13,7 @@ type MealList = {
   meta: object;
 };
 
-async function getData(): Promise<MealList | undefined> {
+async function getMeals(): Promise<MealList | undefined> {
   try {
     const response = await fetch(
       `https://meal-api-eight.vercel.app/meals?page=1&limit=10`
@@ -29,9 +29,13 @@ async function getData(): Promise<MealList | undefined> {
 }
 export default function PastaSauceRecipe() {
   const [data, setData] = useState<Meal[]>([]);
+
   useEffect(() => {
-    getData().then((r) => setData(r.data));
+    getMeals().then((r) => {
+      if (r !== undefined) setData(r.data);
+    });
   }, []);
+
   const listItems = data.map((item) => <li key={item.slug}>{item.name}</li>);
   return (
     <>
