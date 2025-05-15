@@ -1,4 +1,4 @@
-"use client";
+("use client");
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type TokenResponse = {
