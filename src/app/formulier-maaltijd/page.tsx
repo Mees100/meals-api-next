@@ -1,11 +1,11 @@
 "use client";
 
-// import FormulierMaaltijd from "../components/CreateMeal/CreatMeal";
+import FormCreatMeal from "../components/CreateMeal/CreateMeal";
 
-// export default function CreateMealPage() {
-//   return (
-//     <>
-//       <FormulierMaaltijd />
-//     </>
-//   );
-// }
+export default function CreateMealPage() {
+  return (
+    <>
+      <FormCreatMeal />
+    </>
+  );
+}

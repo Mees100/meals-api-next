@@ -1,4 +1,4 @@
-("use client");
+"use client";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type TokenResponse = {
@@ -47,6 +47,7 @@ export default function Login() {
       if (t !== undefined) {
         sessionStorage.setItem("access_token", t.access_token);
         alert("Je bent ingelogd met " + t.access_token);
+        return;
       }
       alert("helaas");
     });
