@@ -57,7 +57,7 @@ export default function FormCreatMeal() {
       <div className={styles.contactPage}>
         <div className={styles.contactForm}>
           <Form action="/search" onSubmit={handleSubmit(onSubmit)}>
-            <h1>Contactformulier</h1>
+            <h1>Creat meal</h1>
 
             <div className={styles.controlLabelstar}>
               <strong>*</strong>
@@ -66,7 +66,7 @@ export default function FormCreatMeal() {
 
             <div className={styles.inputGroup}>
               <label htmlFor="name" className={styles.required}>
-                Naam
+                naam
               </label>
               <input
                 type="text"
@@ -100,7 +100,7 @@ export default function FormCreatMeal() {
             </div>
             <div className={styles.inputGroup}>
               <label htmlFor="description" className={styles.required}>
-                description
+                description (minstens 5 letters)
               </label>
               <input
                 type="text"
