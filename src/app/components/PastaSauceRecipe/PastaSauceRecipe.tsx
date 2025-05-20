@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import MainInner from "../MainInner/MainInner";
 
 type Meal = {
   name: string;
@@ -16,7 +17,10 @@ type MealList = {
 async function getMeals(): Promise<MealList | undefined> {
   try {
     const response = await fetch(
-      `https://meal-api-eight.vercel.app/meals?page=1&limit=10`
+      `https://meal-api-eight.vercel.app/meals?page=1&limit=10`,
+      {
+        cache: "no-store",
+      }
     );
 
     if (response.ok) {
@@ -39,7 +43,9 @@ export default function PastaSauceRecipe() {
   const listItems = data.map((item) => <li key={item.slug}>{item.name}</li>);
   return (
     <>
-      <ul>{listItems}</ul>
+      <MainInner>
+        <ul>{listItems}</ul>
+      </MainInner>
     </>
   );
 }

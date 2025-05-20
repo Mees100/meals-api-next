@@ -54,8 +54,14 @@ export default function Login() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register("username")} />
-      <input {...register("password", { required: true })} />
+      <label>username</label>
+      <input type="email" placeholder="email" {...register("username")} />
+      <label>password</label>
+      <input
+        type="password"
+        placeholder="Password"
+        {...register("password", { required: true })}
+      />
       {errors.password && <span>This field is required</span>}
       <input type="submit" />
     </form>

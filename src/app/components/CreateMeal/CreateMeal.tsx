@@ -3,6 +3,7 @@ import { ChangeEvent, FormEvent, SetStateAction, useState } from "react";
 import Form from "next/form";
 import { useForm, SubmitHandler } from "react-hook-form";
 import styles from "./CreateMeal.module.scss";
+import MainInner from "../MainInner/MainInner";
 
 const url = "https://meal-api-eight.vercel.app/meals";
 
@@ -107,7 +108,10 @@ export default function FormCreatMeal() {
                 id="description"
                 {...register("description", {
                   required: "Dit veld is verplicht",
-                  minLength: { value: 5, message: "Vul minstens 5 letters in" },
+                  minLength: {
+                    value: 5,
+                    message: "Vul minstens 5 letters in",
+                  },
                 })}
                 placeholder="description"
               ></input>
