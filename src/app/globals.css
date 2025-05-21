@@ -9,4 +9,6 @@ body {
   height: auto;
   font-size: 1rem;
   width: 100%;
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 1rem;
 }

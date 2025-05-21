@@ -1,6 +1,9 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form";
 
+import { useState } from "react";
+import styles from "./Login.module.scss";
+
 type TokenResponse = {
   access_token: string;
   token_type: string;
@@ -52,18 +55,65 @@ export default function Login() {
       alert("helaas");
     });
 
+  const [showModal, setShowModal] = useState(false);
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label>username</label>
-      <input type="email" placeholder="email" {...register("username")} />
-      <label>password</label>
-      <input
-        type="password"
-        placeholder="Password"
-        {...register("password", { required: true })}
-      />
-      {errors.password && <span>This field is required</span>}
-      <input type="submit" />
-    </form>
+    <div className={styles.container}>
+      <button
+        className={styles.btnModalOpen}
+        onClick={() => setShowModal(true)}
+      >
+        Login
+      </button>
+      {showModal && (
+        <div className={styles.modalWrapper}>
+          <div className={styles.modal}>
+            <div>
+              <h2>Login</h2>
+              <span
+                onClick={() => setShowModal(false)}
+                className={styles.modalClose}
+                title="Close Modal"
+              >
+                &times;
+              </span>
+            </div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div>
+                <label>username</label>
+                <input
+                  className={styles.inputGroup}
+                  type="email"
+                  placeholder="email"
+                  {...register("username")}
+                  required
+                />
+              </div>
+              <div>
+                <label>password</label>
+                <input
+                  className={styles.inputGroup}
+                  type="password"
+                  placeholder="Password"
+                  {...register("password", { required: true })}
+                  required
+                />
+                {errors.password && <span>This field is required</span>}
+              </div>
+              <button className={styles.btnLogin} type="submit">
+                Login
+              </button>
+              <button
+                className={styles.btnCancel}
+                type="button"
+                onClick={() => setShowModal(false)}
+              >
+                Cancel
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

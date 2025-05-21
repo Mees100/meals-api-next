@@ -2,11 +2,24 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navigation from "./components/Navigation/Navigation";
 import styles from "../styles/layout.module.scss";
+import type { Viewport } from "next";
+import { Roboto } from "next/font/google";
+
+export const viewport: Viewport = {
+  initialScale: 1,
+  width: "device-width",
+};
 
 export const metadata: Metadata = {
   title: "API-demo portfolio",
   description: "portfolio API-demo ",
 };
+
+const roboto = Roboto({
+  weight: "400",
+  variable: "--font-roboto",
+  subsets: ["latin"],
+});
 
 export default function RootLayout({
   children,
@@ -14,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${roboto.variable}`}>
       <Navigation />
       <body className={styles.main}>{children}</body>
     </html>
