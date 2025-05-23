@@ -1,0 +1,19 @@
+@use "../../../styles/variables" as *;
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+  display: block;
+
+  h1 {
+    font-weight: 400;
+    margin: 0;
+  }
+  .listRecipe {
+    margin: 5% 0;
+    ul {
+      list-style: none;
+    }
+  }
+}

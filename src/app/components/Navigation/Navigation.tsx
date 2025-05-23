@@ -17,7 +17,7 @@ export default function Navigation() {
     <>
       <div className={headerTopWrapperClassName}>
         <div className={styles.logo}>
-          <Link href="./">requests with fetch API</Link>
+          <Link href="./">Requests with fetch API</Link>
         </div>
         <div
           className={styles.menuIcon}

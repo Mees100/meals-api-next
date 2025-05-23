@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import MainInner from "../MainInner/MainInner";
+import styles from "./PastaSauceRecipe.module.scss";
 
 type Meal = {
   name: string;
@@ -44,7 +45,12 @@ export default function PastaSauceRecipe() {
   return (
     <>
       <MainInner>
-        <ul>{listItems}</ul>
+        <div className={styles.container}>
+          <h1>Pasta sauce recipe - async GET request</h1>
+          <div className={styles.listRecipe}>
+            <ul>{listItems}</ul>
+          </div>
+        </div>
       </MainInner>
     </>
   );
