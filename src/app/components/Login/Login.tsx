@@ -68,15 +68,8 @@ export default function Login() {
       {showModal && (
         <div className={styles.modalWrapper}>
           <div className={styles.modal}>
-            <div>
+            <div className={styles.modalTitle}>
               <h2>Login</h2>
-              <span
-                onClick={() => setShowModal(false)}
-                className={styles.modalClose}
-                title="Close Modal"
-              >
-                &times;
-              </span>
             </div>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className={styles.inputGroup}>
@@ -92,7 +85,7 @@ export default function Login() {
                 <label>password</label>
                 <input
                   type="password"
-                  placeholder="Password"
+                  placeholder="password"
                   {...register("password", { required: true })}
                   required
                 />
