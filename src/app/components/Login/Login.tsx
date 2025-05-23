@@ -79,20 +79,18 @@ export default function Login() {
               </span>
             </div>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div>
+              <div className={styles.inputGroup}>
                 <label>username</label>
                 <input
-                  className={styles.inputGroup}
                   type="email"
                   placeholder="email"
                   {...register("username")}
                   required
                 />
               </div>
-              <div>
+              <div className={styles.inputGroup}>
                 <label>password</label>
                 <input
-                  className={styles.inputGroup}
                   type="password"
                   placeholder="Password"
                   {...register("password", { required: true })}
