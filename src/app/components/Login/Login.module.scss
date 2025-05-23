@@ -6,7 +6,7 @@
   margin-top: 5%;
 
   .btnModalOpen {
-    background-color: #04aa6d;
+    background-color: $color-btnLogin;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -86,19 +86,32 @@
     }
   }
 
-  .btnCancel,
-  .btnLogin {
+  button {
     display: block;
-    padding: 10px;
+    padding: 10px 12px;
     min-width: 7em;
-    padding: 10px 14px;
+    color: white;
+    padding: 14px 20px;
     margin: 15px 0;
     border: none;
     border-radius: 4px;
     transition: 0.3s;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 1rem;
     cursor: pointer;
+    &:hover {
+      background-color: $btn-bg;
+    }
+  }
+  button[type="submit"] {
+    background-color: $color-btnLogin;
+    &:hover {
+      background-color: $btn-bg;
+    }
+  }
+  button[type="button"] {
+    background-color: $color-btnCancel;
+
     &:hover {
       background-color: $btn-bg;
     }

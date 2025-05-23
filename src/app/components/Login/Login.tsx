@@ -98,14 +98,8 @@ export default function Login() {
                 />
                 {errors.password && <span>This field is required</span>}
               </div>
-              <button className={styles.btnLogin} type="submit">
-                Login
-              </button>
-              <button
-                className={styles.btnCancel}
-                type="button"
-                onClick={() => setShowModal(false)}
-              >
+              <button type="submit">Login</button>
+              <button type="button" onClick={() => setShowModal(false)}>
                 Cancel
               </button>
             </form>
