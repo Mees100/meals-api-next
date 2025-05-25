@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 
 import { useState } from "react";
 import styles from "./Login.module.scss";
+import { setToken } from "./utils";
 
 type TokenResponse = {
   access_token: string;
@@ -48,11 +49,12 @@ export default function Login() {
   const onSubmit: SubmitHandler<Inputs> = (data) =>
     getToken(data.username, data.password).then((t) => {
       if (t !== undefined) {
-        sessionStorage.setItem("access_token", t.access_token);
-        alert("Je bent ingelogd met " + t.access_token);
+        setToken(t.access_token);
+        setShowModal(false);
+        // alert("Je bent ingelogd met " + t.access_token);
         return;
       }
-      alert("helaas");
+      alert("helaas, het inloggen is niet gelukt");
     });
 
   const [showModal, setShowModal] = useState(false);

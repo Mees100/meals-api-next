@@ -1,9 +1,16 @@
 "use client";
-import { ChangeEvent, FormEvent, SetStateAction, useState } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import Form from "next/form";
 import { useForm, SubmitHandler } from "react-hook-form";
 import styles from "./CreateMeal.module.scss";
 import MainInner from "../MainInner/MainInner";
+import { getToken } from "../Login/utils";
 
 const url = "https://meal-api-eight.vercel.app/meals";
 
@@ -12,7 +19,7 @@ async function createMeal(
   ingredient: string,
   description: string
 ): Promise<boolean> {
-  const apiKey = sessionStorage.getItem("access_token");
+  const apiKey = getToken();
 
   try {
     const response = await fetch(url, {
@@ -52,6 +59,12 @@ export default function FormCreatMeal() {
   } = useForm<Inputs>();
 
   const [message, setMessage] = useState<string>("");
+
+  useEffect(() => {
+    if (getToken() === null) {
+      setMessage("Let op, je moet eerst nog inloggen!");
+    }
+  }, []);
 
   // console.log(errors);
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
@@ -144,53 +157,3 @@ export default function FormCreatMeal() {
     </>
   );
 }
-
-// export default function FormulierMaaltijd() {
-//   const [title, setTitle] = useState("");
-//   const [ingredient, setIngredient] = useState("");
-//   const [description, setDescription] = useState("");
-
-//   const onTitleChange = (event: {
-//     target: { value: SetStateAction<string> };
-//   }) => setTitle(event.target.value);
-
-//   const onIngredientChange = (event: {
-//     target: { value: SetStateAction<string> };
-//   }) => setIngredient(event.target.value);
-
-//   const onDescriptionChange = (event: ChangeEvent<HTMLInputElement>) =>
-//     setDescription(event.target.value);
-
-//   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-//     event.preventDefault();
-//     creatMealtwo(title, ingredient, description);
-//   };
-
-//   return (
-//     <>
-//       <div>
-//         <form onSubmit={handleSubmit}>
-//           <input
-//             placeholder="Title"
-//             value={title}
-//             onChange={onTitleChange}
-//             required
-//           ></input>
-//           <input
-//             placeholder="Ingredient"
-//             value={ingredient}
-//             onChange={onIngredientChange}
-//             required
-//           ></input>
-//           <input
-//             placeholder="Description"
-//             value={description}
-//             onChange={onDescriptionChange}
-//             required
-//           ></input>
-//           <button type="submit">Create</button>
-//         </form>
-//       </div>
-//     </>
-//   );
-// }
