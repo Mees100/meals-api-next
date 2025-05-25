@@ -1,15 +1,8 @@
 "use client";
-import {
-  ChangeEvent,
-  FormEvent,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 import Form from "next/form";
 import { useForm, SubmitHandler } from "react-hook-form";
 import styles from "./CreateMeal.module.scss";
-import MainInner from "../MainInner/MainInner";
 import { getToken } from "../Login/utils";
 
 const url = "https://meal-api-eight.vercel.app/meals";
@@ -27,7 +20,7 @@ async function createMeal(
       body: JSON.stringify({
         name: name,
         ingredients: [ingredient],
-        description: "string",
+        description,
         slug: "string",
       }),
       headers: {
