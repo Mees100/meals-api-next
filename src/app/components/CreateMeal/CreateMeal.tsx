@@ -66,7 +66,6 @@ export default function FormCreatMeal() {
     }
   }, []);
 
-  // console.log(errors);
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const result = await createMeal(
       data.name,
@@ -86,7 +85,7 @@ export default function FormCreatMeal() {
         <div className={styles.contactForm}>
           {message && <div className={styles.message}>{message}</div>}
           <Form action="/search" onSubmit={handleSubmit(onSubmit)}>
-            <h1>Creat meal</h1>
+            <h1>Maaltijd maken</h1>
 
             <div className={styles.controlLabelstar}>
               <strong>*</strong>
@@ -111,7 +110,7 @@ export default function FormCreatMeal() {
             </div>
             <div className={styles.inputGroup}>
               <label htmlFor="ingredient" className={styles.required}>
-                ingredients
+                ingrediënten
               </label>
               <input
                 type="text"
@@ -129,7 +128,7 @@ export default function FormCreatMeal() {
             </div>
             <div className={styles.inputGroup}>
               <label htmlFor="description" className={styles.required}>
-                description (minstens 5 letters)
+                beschrijving (minstens 5 letters)
               </label>
               <input
                 type="text"
@@ -150,7 +149,7 @@ export default function FormCreatMeal() {
               )}
             </div>
 
-            <button type="submit">Submit</button>
+            <button type="submit">Opslaan</button>
           </Form>
         </div>
       </div>

@@ -51,7 +51,6 @@ export default function Login() {
       if (t !== undefined) {
         setToken(t.access_token);
         setShowModal(false);
-        // alert("Je bent ingelogd met " + t.access_token);
         return;
       }
       alert("helaas, het inloggen is niet gelukt");
@@ -65,17 +64,17 @@ export default function Login() {
         className={styles.btnModalOpen}
         onClick={() => setShowModal(true)}
       >
-        Login
+        Inloggen
       </button>
       {showModal && (
         <div className={styles.modalWrapper}>
           <div className={styles.modal}>
             <div className={styles.modalTitle}>
-              <h2>Login</h2>
+              <h2>Inloggen</h2>
             </div>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className={styles.inputGroup}>
-                <label>username</label>
+                <label>naam</label>
                 <input
                   type="email"
                   placeholder="email"
@@ -84,18 +83,18 @@ export default function Login() {
                 />
               </div>
               <div className={styles.inputGroup}>
-                <label>password</label>
+                <label>wachtwoord</label>
                 <input
                   type="password"
                   placeholder="password"
                   {...register("password", { required: true })}
                   required
                 />
-                {errors.password && <span>This field is required</span>}
+                {errors.password && <span>Dit veld is verplicht</span>}
               </div>
-              <button type="submit">Login</button>
+              <button type="submit">Inloggen</button>
               <button type="button" onClick={() => setShowModal(false)}>
-                Cancel
+                Annuleren
               </button>
             </form>
           </div>

@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${roboto.variable}`}>
+    <html lang="nl" className={`${roboto.variable}`}>
       <body className={styles.main}>
         <Navigation />
         {children}

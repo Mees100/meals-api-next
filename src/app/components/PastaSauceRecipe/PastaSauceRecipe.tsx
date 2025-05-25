@@ -46,7 +46,7 @@ export default function PastaSauceRecipe() {
     <>
       <MainInner>
         <div className={styles.container}>
-          <h1>Pasta sauce recipe - async GET request</h1>
+          <h1>Maaltijden - async GET request</h1>
           <div className={styles.listRecipe}>
             <ul>{listItems}</ul>
           </div>
