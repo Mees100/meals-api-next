@@ -1,6 +1,10 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form";
 
+import { useState } from "react";
+import styles from "./Login.module.scss";
+import { setToken } from "./utils";
+
 type TokenResponse = {
   access_token: string;
   token_type: string;
@@ -45,19 +49,57 @@ export default function Login() {
   const onSubmit: SubmitHandler<Inputs> = (data) =>
     getToken(data.username, data.password).then((t) => {
       if (t !== undefined) {
-        sessionStorage.setItem("access_token", t.access_token);
-        alert("Je bent ingelogd met " + t.access_token);
+        setToken(t.access_token);
+        setShowModal(false);
         return;
       }
-      alert("helaas");
+      alert("helaas, het inloggen is niet gelukt");
     });
 
+  const [showModal, setShowModal] = useState(false);
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register("username")} />
-      <input {...register("password", { required: true })} />
-      {errors.password && <span>This field is required</span>}
-      <input type="submit" />
-    </form>
+    <div className={styles.container}>
+      <button
+        className={styles.btnModalOpen}
+        onClick={() => setShowModal(true)}
+      >
+        Inloggen
+      </button>
+      {showModal && (
+        <div className={styles.modalWrapper}>
+          <div className={styles.modal}>
+            <div className={styles.modalTitle}>
+              <h2>Inloggen</h2>
+            </div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className={styles.inputGroup}>
+                <label>naam</label>
+                <input
+                  type="email"
+                  placeholder="email"
+                  {...register("username")}
+                  required
+                />
+              </div>
+              <div className={styles.inputGroup}>
+                <label>wachtwoord</label>
+                <input
+                  type="password"
+                  placeholder="password"
+                  {...register("password", { required: true })}
+                  required
+                />
+                {errors.password && <span>Dit veld is verplicht</span>}
+              </div>
+              <button type="submit">Inloggen</button>
+              <button type="button" onClick={() => setShowModal(false)}>
+                Annuleren
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

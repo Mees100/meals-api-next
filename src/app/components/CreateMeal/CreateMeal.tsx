@@ -1,17 +1,25 @@
 "use client";
-import { ChangeEvent, FormEvent, SetStateAction, useState } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import Form from "next/form";
 import { useForm, SubmitHandler } from "react-hook-form";
 import styles from "./CreateMeal.module.scss";
+import MainInner from "../MainInner/MainInner";
+import { getToken } from "../Login/utils";
 
 const url = "https://meal-api-eight.vercel.app/meals";
 
-async function creatMealtwo(
+async function createMeal(
   name: string,
   ingredient: string,
   description: string
-) {
-  const apiKey = sessionStorage.getItem("access_token");
+): Promise<boolean> {
+  const apiKey = getToken();
 
   try {
     const response = await fetch(url, {
@@ -30,10 +38,12 @@ async function creatMealtwo(
     if (response.ok) {
       const jsonResponse = await response.json();
       console.log("Meal created successfully:", jsonResponse);
+      return true;
     }
   } catch (error) {
     console.log(error);
   }
+  return false;
 }
 
 type Inputs = {
@@ -48,16 +58,34 @@ export default function FormCreatMeal() {
     formState: { errors },
   } = useForm<Inputs>();
 
-  // console.log(errors);
-  const onSubmit: SubmitHandler<Inputs> = (data) =>
-    creatMealtwo(data.name, data.ingredient, data.description);
+  const [message, setMessage] = useState<string>("");
+
+  useEffect(() => {
+    if (getToken() === null) {
+      setMessage("Let op, je moet eerst nog inloggen!");
+    }
+  }, []);
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const result = await createMeal(
+      data.name,
+      data.ingredient,
+      data.description
+    );
+    if (result === false) {
+      setMessage("Er trad een fout op");
+    } else {
+      setMessage("Het is gelukt");
+    }
+  };
 
   return (
     <>
       <div className={styles.contactPage}>
         <div className={styles.contactForm}>
+          {message && <div className={styles.message}>{message}</div>}
           <Form action="/search" onSubmit={handleSubmit(onSubmit)}>
-            <h1>Creat meal</h1>
+            <h1>Maaltijd maken</h1>
 
             <div className={styles.controlLabelstar}>
               <strong>*</strong>
@@ -82,7 +110,7 @@ export default function FormCreatMeal() {
             </div>
             <div className={styles.inputGroup}>
               <label htmlFor="ingredient" className={styles.required}>
-                ingredients
+                ingrediënten
               </label>
               <input
                 type="text"
@@ -100,14 +128,17 @@ export default function FormCreatMeal() {
             </div>
             <div className={styles.inputGroup}>
               <label htmlFor="description" className={styles.required}>
-                description (minstens 5 letters)
+                beschrijving (minstens 5 letters)
               </label>
               <input
                 type="text"
                 id="description"
                 {...register("description", {
                   required: "Dit veld is verplicht",
-                  minLength: { value: 5, message: "Vul minstens 5 letters in" },
+                  minLength: {
+                    value: 5,
+                    message: "Vul minstens 5 letters in",
+                  },
                 })}
                 placeholder="description"
               ></input>
@@ -118,60 +149,10 @@ export default function FormCreatMeal() {
               )}
             </div>
 
-            <button type="submit">Submit</button>
+            <button type="submit">Opslaan</button>
           </Form>
         </div>
       </div>
     </>
   );
 }
-
-// export default function FormulierMaaltijd() {
-//   const [title, setTitle] = useState("");
-//   const [ingredient, setIngredient] = useState("");
-//   const [description, setDescription] = useState("");
-
-//   const onTitleChange = (event: {
-//     target: { value: SetStateAction<string> };
-//   }) => setTitle(event.target.value);
-
-//   const onIngredientChange = (event: {
-//     target: { value: SetStateAction<string> };
-//   }) => setIngredient(event.target.value);
-
-//   const onDescriptionChange = (event: ChangeEvent<HTMLInputElement>) =>
-//     setDescription(event.target.value);
-
-//   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-//     event.preventDefault();
-//     creatMealtwo(title, ingredient, description);
-//   };
-
-//   return (
-//     <>
-//       <div>
-//         <form onSubmit={handleSubmit}>
-//           <input
-//             placeholder="Title"
-//             value={title}
-//             onChange={onTitleChange}
-//             required
-//           ></input>
-//           <input
-//             placeholder="Ingredient"
-//             value={ingredient}
-//             onChange={onIngredientChange}
-//             required
-//           ></input>
-//           <input
-//             placeholder="Description"
-//             value={description}
-//             onChange={onDescriptionChange}
-//             required
-//           ></input>
-//           <button type="submit">Create</button>
-//         </form>
-//       </div>
-//     </>
-//   );
-// }

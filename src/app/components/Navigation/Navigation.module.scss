@@ -1,0 +1,141 @@
+@use "../../../styles/variables" as *;
+
+.headerBar {
+  height: 100px;
+  box-shadow: 0 0 8px #17171a0d, 0 2px 8px #17171a14;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  z-index: 1001;
+  max-width: 100%;
+}
+
+.clearHeader {
+  position: static;
+  margin-top: 100px;
+}
+
+.headerTopWrapper {
+  max-width: 1200px;
+  height: $nav-height;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: inline-flex;
+
+  .logo {
+    width: 50%;
+    margin: unset;
+    text-align: start;
+    align-content: center;
+
+    a {
+      color: $primary-font-color;
+      display: inline;
+      align-items: center;
+      text-decoration: none;
+      font : {
+        family: var(--font-gwendolyn);
+        style: normal;
+        size: 2rem;
+      }
+      @media only screen and (max-width: 576px) {
+        font-size: 3rem;
+      }
+    }
+  }
+  .menuIcon {
+    display: none;
+  }
+  .nav {
+    justify-content: end;
+    align-content: center;
+    width: 50%;
+    display: flex;
+
+    .menuLink {
+      color: #545756;
+      padding: 15px;
+      text-decoration: none;
+      margin: 0;
+      align-content: center;
+      transition: color 0.3s ease;
+
+      &:hover,
+      &.active {
+        color: lighten(#545756, 20);
+      }
+      @media only screen and (max-width: 576px) {
+        padding: 10px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: $breakpoint-small) {
+    .menuIcon {
+      margin-top: 25px;
+      display: block;
+      width: 35px;
+      cursor: pointer;
+      position: absolute;
+      right: 35px;
+    }
+    &.headerTopWrapperMenuOpen {
+      .logo {
+        display: none;
+      }
+      .nav {
+        display: flex;
+        background-color: $primary-color;
+        flex-flow: column nowrap;
+        flex-basis: 100%;
+        height: 100vh;
+        justify-content: normal;
+        flex-shrink: 0;
+        text-align: center;
+        padding-top: 90px;
+        text-decoration: underline;
+      }
+    }
+    .menuBar {
+      height: 3px;
+      background-color: $dark-bg;
+      margin: 6px 0;
+    }
+    .menuClose {
+      font-size: 23px;
+      text-align: end;
+    }
+
+    .logo {
+      flex-grow: 2;
+    }
+
+    .nav {
+      background: white;
+      height: 0;
+      width: 0;
+      overflow: hidden;
+      transition: background-color 1s linear;
+    }
+  }
+}
+
+@media (min-width: $breakpoint-large) {
+  .HeaderMenu {
+    background-color: $primary-color;
+    h1 {
+      text-align: center;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-large) {
+  .HeaderMenu {
+    width: 100%;
+  }
+}

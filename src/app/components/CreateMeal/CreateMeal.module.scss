@@ -1,11 +1,11 @@
-@use "../../styles/variables" as *;
+@use "../../../styles/variables" as *;
 
 .contactPage {
   max-width: 1200px;
 
   .contactForm {
     border-radius: 5px;
-    padding: 20px;
+
     h1 {
       margin: 15px 0;
       font-weight: 400;
@@ -71,4 +71,9 @@
       padding-top: 3rem;
     }
   }
+}
+
+.message {
+  padding: 1em;
+  border: 1px solid;
 }

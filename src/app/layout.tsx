@@ -1,21 +1,25 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Navigation from "./components/Navigation/Navigation";
+import styles from "../styles/layout.module.scss";
+import type { Viewport } from "next";
+import { Roboto } from "next/font/google";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+export const viewport: Viewport = {
+  initialScale: 1,
+  width: "device-width",
+};
 
 export const metadata: Metadata = {
-  title: "API-demo",
+  title: "API-demo portfolio",
   description: "portfolio API-demo ",
 };
+
+const roboto = Roboto({
+  weight: "400",
+  variable: "--font-roboto",
+  subsets: ["latin"],
+});
 
 export default function RootLayout({
   children,
@@ -23,8 +27,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="nl" className={`${roboto.variable}`}>
+      <body className={styles.main}>
+        <Navigation />
         {children}
       </body>
     </html>
