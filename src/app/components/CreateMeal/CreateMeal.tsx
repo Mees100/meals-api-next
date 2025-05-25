@@ -7,11 +7,11 @@ import MainInner from "../MainInner/MainInner";
 
 const url = "https://meal-api-eight.vercel.app/meals";
 
-async function creatMealtwo(
+async function createMeal(
   name: string,
   ingredient: string,
   description: string
-) {
+): Promise<boolean> {
   const apiKey = sessionStorage.getItem("access_token");
 
   try {
@@ -31,10 +31,12 @@ async function creatMealtwo(
     if (response.ok) {
       const jsonResponse = await response.json();
       console.log("Meal created successfully:", jsonResponse);
+      return true;
     }
   } catch (error) {
     console.log(error);
   }
+  return false;
 }
 
 type Inputs = {
@@ -49,14 +51,27 @@ export default function FormCreatMeal() {
     formState: { errors },
   } = useForm<Inputs>();
 
+  const [message, setMessage] = useState<string>("");
+
   // console.log(errors);
-  const onSubmit: SubmitHandler<Inputs> = (data) =>
-    creatMealtwo(data.name, data.ingredient, data.description);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const result = await createMeal(
+      data.name,
+      data.ingredient,
+      data.description
+    );
+    if (result === false) {
+      setMessage("Er trad een fout op");
+    } else {
+      setMessage("Het is gelukt");
+    }
+  };
 
   return (
     <>
       <div className={styles.contactPage}>
         <div className={styles.contactForm}>
+          {message && <div className={styles.message}>{message}</div>}
           <Form action="/search" onSubmit={handleSubmit(onSubmit)}>
             <h1>Creat meal</h1>
 
