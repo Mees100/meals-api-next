@@ -28,8 +28,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${roboto.variable}`}>
-      <Navigation />
-      <body className={styles.main}>{children}</body>
+      <body className={styles.main}>
+        <Navigation />
+        {children}
+      </body>
     </html>
   );
 }
