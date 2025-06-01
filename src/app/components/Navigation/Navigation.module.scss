@@ -38,13 +38,19 @@
       display: inline;
       align-items: center;
       text-decoration: none;
+
       font : {
         family: var(--font-gwendolyn);
         style: normal;
         size: 2rem;
       }
-      @media only screen and (max-width: 576px) {
-        font-size: 3rem;
+      @media only screen and (max-width: $breakpoint-small) {
+        font-size: 1.5rem;
+        padding-left: 5%;
+      }
+      @media only screen and (max-width: $breakpoint-large) {
+        font-size: 1.5rem;
+        padding-left: 10%;
       }
     }
   }
