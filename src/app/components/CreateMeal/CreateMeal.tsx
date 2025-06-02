@@ -10,7 +10,8 @@ const url = "https://meal-api-eight.vercel.app/meals";
 async function createMeal(
   name: string,
   ingredient: string,
-  description: string
+  description: string,
+  slug: string
 ): Promise<boolean> {
   const apiKey = getToken();
 
@@ -21,7 +22,7 @@ async function createMeal(
         name: name,
         ingredients: [ingredient],
         description,
-        slug: "string",
+        slug: slug,
       }),
       headers: {
         "Content-type": "application/json",
@@ -43,6 +44,7 @@ type Inputs = {
   name: string;
   ingredient: string;
   description: string;
+  slug: string;
 };
 export default function FormCreatMeal() {
   const {
@@ -63,7 +65,8 @@ export default function FormCreatMeal() {
     const result = await createMeal(
       data.name,
       data.ingredient,
-      data.description
+      data.description,
+      data.slug
     );
     if (result === false) {
       setMessage("Er trad een fout op");
@@ -138,6 +141,24 @@ export default function FormCreatMeal() {
               {errors.description && (
                 <span className={styles.errorMessage}>
                   {errors.description.message}
+                </span>
+              )}
+            </div>
+            <div className={styles.inputGroup}>
+              <label htmlFor="kenmerk" className={styles.required}>
+                kenmerk(slug)
+              </label>
+              <input
+                type="text"
+                id="slug"
+                {...register("slug", {
+                  required: "Dit veld is verplicht",
+                })}
+                placeholder="kenmerk"
+              ></input>
+              {errors.slug && (
+                <span className={styles.errorMessage}>
+                  {errors.slug.message}
                 </span>
               )}
             </div>
