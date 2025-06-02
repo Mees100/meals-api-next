@@ -11,7 +11,7 @@ type Meal = {
 async function getMeal(slug: string): Promise<Meal | undefined> {
   try {
     const response = await fetch(
-      `https://meal-api-eight.vercel.app/meals/{slug}`,
+      `https://meal-api-eight.vercel.app/meals/${slug}`,
       {
         cache: "no-store",
       }
@@ -38,7 +38,7 @@ export default function Page({
     getMeal(slug).then((r) => {
       if (r !== undefined) setData(r);
     });
-  }, []);
+  }, [slug]);
   return (
     <div>
       My Post: {data?.name} {data?.description}
