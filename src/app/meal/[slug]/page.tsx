@@ -26,9 +26,12 @@ async function getMeal(slug: string): Promise<Meal | undefined> {
   }
 }
 
-export default function Page({ params }: { params: { slug: string } }) {
-  // TODO: fix error
-  const { slug } = params;
+export default function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = use(params);
   const [data, setData] = useState<Meal>();
 
   useEffect(() => {
