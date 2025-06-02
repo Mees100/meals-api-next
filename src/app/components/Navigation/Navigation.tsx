@@ -17,7 +17,7 @@ export default function Navigation() {
     <>
       <div className={headerTopWrapperClassName}>
         <div className={styles.logo}>
-          <Link href="./">Requests with fetch API</Link>
+          <Link href="/">Requests with fetch API</Link>
         </div>
         <div
           className={styles.menuIcon}
@@ -35,7 +35,7 @@ export default function Navigation() {
         </div>
         <nav className={styles.nav}>
           <Link
-            href="./"
+            href="/"
             className={
               pathname === "/"
                 ? styles.menuLink + " " + styles.active
@@ -46,7 +46,7 @@ export default function Navigation() {
             async POST request and login
           </Link>
           <Link
-            href="./async-get-request"
+            href="/async-get-request"
             className={
               pathname === "/about"
                 ? styles.menuLink + " " + styles.active
