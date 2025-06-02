@@ -105,7 +105,7 @@ export default function FormCreatMeal() {
               )}
             </div>
             <div className={styles.inputGroup}>
-              <label htmlFor="ingredient" className={styles.required}>
+              <label htmlFor="ingredients" className={styles.required}>
                 ingrediënten
               </label>
               <input
@@ -145,7 +145,7 @@ export default function FormCreatMeal() {
               )}
             </div>
             <div className={styles.inputGroup}>
-              <label htmlFor="kenmerk" className={styles.required}>
+              <label htmlFor="slug" className={styles.required}>
                 kenmerk(slug)
               </label>
               <input
