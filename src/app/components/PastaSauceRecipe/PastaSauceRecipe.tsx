@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import MainInner from "../MainInner/MainInner";
 import styles from "./PastaSauceRecipe.module.scss";
+import Link from "next/link";
 
 type Meal = {
   name: string;
@@ -41,7 +42,11 @@ export default function PastaSauceRecipe() {
     });
   }, []);
 
-  const listItems = data.map((item) => <li key={item.slug}>{item.name}</li>);
+  const listItems = data.map((item) => (
+    <li key={item.slug}>
+      <Link href={`meal/${item.slug}`}>{item.name}</Link>
+    </li>
+  ));
   return (
     <>
       <MainInner>

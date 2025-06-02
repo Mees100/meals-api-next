@@ -46,7 +46,7 @@ export default function Navigation() {
             async POST request and login
           </Link>
           <Link
-            href="./async-get-request"
+            href="/async-get-request"
             className={
               pathname === "/about"
                 ? styles.menuLink + " " + styles.active
