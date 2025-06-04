@@ -9,8 +9,8 @@ export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
     const hasToken = getToken() !== null;
-    setIsLoggedIn(hasToken), [];
-  });
+    setIsLoggedIn(hasToken);
+  }, []);
   return (
     <MainInner>
       <div>
