@@ -46,7 +46,11 @@ type Inputs = {
   description: string;
   slug: string;
 };
-export default function FormCreatMeal() {
+export default function FormCreateMeal({
+  isLoggedIn,
+}: {
+  isLoggedIn: boolean;
+}) {
   const {
     register,
     handleSubmit,
@@ -54,12 +58,6 @@ export default function FormCreatMeal() {
   } = useForm<Inputs>();
 
   const [message, setMessage] = useState<string>("");
-
-  useEffect(() => {
-    if (getToken() === null) {
-      setMessage("Let op, je moet eerst nog inloggen!");
-    }
-  }, []);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const result = await createMeal(
@@ -79,6 +77,13 @@ export default function FormCreatMeal() {
     <>
       <div className={styles.contactPage}>
         <div className={styles.contactForm}>
+          {isLoggedIn ? (
+            <div className={styles.message}>Je bent ingelogd</div>
+          ) : (
+            <div className={styles.message}>
+              Let op, je moet eerst nog inloggen
+            </div>
+          )}
           {message && <div className={styles.message}>{message}</div>}
           <Form action="/search" onSubmit={handleSubmit(onSubmit)}>
             <h1>Maaltijd maken</h1>

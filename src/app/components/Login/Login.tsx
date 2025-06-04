@@ -39,7 +39,11 @@ type Inputs = {
   password: string;
 };
 
-export default function Login() {
+type LoginProps = {
+  onLogin: () => void;
+};
+
+export default function Login({ onLogin }: LoginProps) {
   const {
     register,
     handleSubmit,
@@ -50,6 +54,7 @@ export default function Login() {
       if (t !== undefined) {
         setToken(t.access_token);
         setShowModal(false);
+        onLogin();
         return;
       }
       alert("helaas, het inloggen is niet gelukt");
