@@ -7,6 +7,14 @@
   .contactForm {
     border-radius: 5px;
 
+    .messageInloggen {
+      color: $warning;
+      font-size: 1.4rem;
+    }
+    .messageIngelogd {
+      color: $color-messageIngelogd;
+    }
+
     h1 {
       margin: 15px 0;
       font-weight: 400;

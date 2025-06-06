@@ -78,9 +78,9 @@ export default function FormCreateMeal({
       <div className={styles.contactPage}>
         <div className={styles.contactForm}>
           {isLoggedIn ? (
-            <div className={styles.message}>Je bent ingelogd</div>
+            <div className={styles.messageIngelogd}>Je bent ingelogd</div>
           ) : (
-            <div className={styles.message}>
+            <div className={styles.messageInloggen}>
               Let op, je moet eerst nog inloggen
             </div>
           )}
