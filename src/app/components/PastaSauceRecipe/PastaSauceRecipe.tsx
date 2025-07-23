@@ -19,7 +19,7 @@ type MealList = {
 async function getMeals(): Promise<MealList | undefined> {
   try {
     const response = await fetch(
-      `https://meal-api-eight.vercel.app/meals?page=1&limit=10`,
+      `http://127.0.0.1:8000/meals?page=1&limit=10`,
       {
         cache: "no-store",
       }
@@ -44,7 +44,55 @@ export default function PastaSauceRecipe() {
 
   const listItems = data.map((item) => (
     <li key={item.slug}>
-      <Link href={`meal/${item.slug}`}>{item.name}</Link>
+      <Link
+        href={`meal/$
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        {item.slug}`}
+      >
+        {item.name}
+      </Link>
     </li>
   ));
   return (
