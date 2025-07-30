@@ -10,12 +10,9 @@ type Meal = {
 
 async function getMeal(slug: string): Promise<Meal | undefined> {
   try {
-    const response = await fetch(
-      `https://meal-api-eight.vercel.app/meals/${slug}`,
-      {
-        cache: "no-store",
-      }
-    );
+    const response = await fetch(`http://127.0.0.1:8000/meals/${slug}`, {
+      cache: "no-store",
+    });
 
     if (response.ok) {
       return await response.json();

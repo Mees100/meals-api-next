@@ -5,11 +5,11 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import styles from "./CreateMeal.module.scss";
 import { getToken } from "../Login/utils";
 
-const url = "https://meal-api-eight.vercel.app/meals";
+const url = "http://127.0.0.1:8000/meals";
 
 async function createMeal(
   name: string,
-  ingredient: string,
+  ingredients: string[],
   description: string,
   slug: string
 ): Promise<boolean> {
@@ -20,7 +20,7 @@ async function createMeal(
       method: "POST",
       body: JSON.stringify({
         name: name,
-        ingredients: [ingredient],
+        ingredients: ingredients,
         description,
         slug: slug,
       }),
@@ -60,9 +60,14 @@ export default function FormCreateMeal({
   const [message, setMessage] = useState<string>("");
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const ingredientsArray = data.ingredient
+      .split(",")
+      .map((i) => i.trim())
+      .filter(Boolean);
+
     const result = await createMeal(
       data.name,
-      data.ingredient,
+      ingredientsArray,
       data.description,
       data.slug
     );
@@ -78,9 +83,9 @@ export default function FormCreateMeal({
       <div className={styles.contactPage}>
         <div className={styles.contactForm}>
           {isLoggedIn ? (
-            <div className={styles.message}>Je bent ingelogd</div>
+            <div className={styles.messageIngelogd}>Je bent ingelogd</div>
           ) : (
-            <div className={styles.message}>
+            <div className={styles.messageInloggen}>
               Let op, je moet eerst nog inloggen
             </div>
           )}
