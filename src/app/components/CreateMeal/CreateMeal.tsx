@@ -20,7 +20,7 @@ async function createMeal(
       method: "POST",
       body: JSON.stringify({
         name: name,
-        ingredients: [ingredients],
+        ingredients: ingredients,
         description,
         slug: slug,
       }),
