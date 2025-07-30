@@ -44,55 +44,7 @@ export default function PastaSauceRecipe() {
 
   const listItems = data.map((item) => (
     <li key={item.slug}>
-      <Link
-        href={`meal/$
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        {item.slug}`}
-      >
-        {item.name}
-      </Link>
+      <Link href={`meal/${item.slug}`}>{item.name}</Link>
     </li>
   ));
   return (
