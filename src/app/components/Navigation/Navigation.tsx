@@ -15,12 +15,13 @@ export default function Navigation() {
 
   return (
     <>
-      <div className={headerTopWrapperClassName}>
+      <div className={headerTopWrapperClassName} data-testid="menu-wrapper">
         <div className={styles.logo}>
           <Link href="/">Requests with fetch API</Link>
         </div>
         <div
           className={styles.menuIcon}
+          data-testid="menu-bar"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? (
