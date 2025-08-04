@@ -67,6 +67,7 @@ export default function Login({ onLogin }: LoginProps) {
       <button
         className={styles.btnModalOpen}
         onClick={() => setShowModal(true)}
+        data-testid="button-inloggen"
       >
         Inloggen
       </button>
