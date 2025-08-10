@@ -10,7 +10,7 @@ type TokenResponse = {
   token_type: string;
 };
 
-async function getToken(
+export async function getToken(
   username: string,
   password: string
 ): Promise<TokenResponse | undefined> {
