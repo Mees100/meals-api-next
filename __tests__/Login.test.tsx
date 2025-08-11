@@ -24,13 +24,13 @@ describe("Login", () => {
     expect(button).toBeInTheDocument();
   });
 
-  it("calls onClick when clicked", () => {
-    const onClick = jest.fn();
-    render(<button onClick={onClick}>Inloggen</button>);
-    const btn = screen.getByText("Inloggen");
-
-    fireEvent.click(btn);
-
-    expect(onClick).toHaveBeenCalled();
+  it("shows modal content if button inloggen is clicked", () => {
+    render(<Login onLogin={() => undefined} />);
+    const btnModalOpen = screen.getByTestId("btnModalOpen");
+    fireEvent.click(btnModalOpen);
+    expect(screen.getByText("naam")).toBeInTheDocument();
+    expect(screen.getByText("wachtwoord")).toBeInTheDocument();
+    expect(screen.getByTestId("modalInloggen")).toBeInTheDocument();
+    expect(screen.getByText("Annuleren")).toBeInTheDocument();
   });
 });
