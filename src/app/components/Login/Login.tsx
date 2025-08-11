@@ -67,7 +67,7 @@ export default function Login({ onLogin }: LoginProps) {
       <button
         className={styles.btnModalOpen}
         onClick={() => setShowModal(true)}
-        data-testid="button-inloggen"
+        data-testid="btnModalOpen"
       >
         Inloggen
       </button>
@@ -97,7 +97,9 @@ export default function Login({ onLogin }: LoginProps) {
                 />
                 {errors.password && <span>Dit veld is verplicht</span>}
               </div>
-              <button type="submit">Inloggen</button>
+              <button type="submit" data-testid="modalInloggen">
+                Inloggen
+              </button>
               <button type="button" onClick={() => setShowModal(false)}>
                 Annuleren
               </button>
