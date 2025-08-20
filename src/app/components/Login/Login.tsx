@@ -79,8 +79,9 @@ export default function Login({ onLogin }: LoginProps) {
             </div>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className={styles.inputGroup}>
-                <label>naam</label>
+                <label htmlFor="email">naam</label>
                 <input
+                  id="email"
                   type="email"
                   placeholder="email"
                   {...register("username")}
@@ -88,8 +89,9 @@ export default function Login({ onLogin }: LoginProps) {
                 />
               </div>
               <div className={styles.inputGroup}>
-                <label>wachtwoord</label>
+                <label htmlFor="password">wachtwoord</label>
                 <input
+                  id="password"
                   type="password"
                   placeholder="password"
                   {...register("password", { required: true })}

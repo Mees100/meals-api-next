@@ -33,4 +33,18 @@ describe("Login", () => {
     expect(screen.getByTestId("modalInloggen")).toBeInTheDocument();
     expect(screen.getByText("Annuleren")).toBeInTheDocument();
   });
+
+  it("Sends credentials after submit", () => {
+    const testedComponent = render(<Login onLogin={() => undefined} />);
+    const btnModalOpen = screen.getByTestId("btnModalOpen");
+    fireEvent.click(btnModalOpen);
+    fireEvent.change(screen.getByLabelText("naam"), {
+      target: { value: "test@example.com" },
+    });
+    fireEvent.change(screen.getByLabelText("wachtwoord"), {
+      target: { value: "password" },
+    });
+    fireEvent.click(screen.getByText("Inloggen"));
+    // TODO: de functie  getToken mocken, en dan testen (met expect) of die is aangeroepen.
+  });
 });
