@@ -1,10 +1,10 @@
 "use client";
-import PastaSauceRecipe from "../components/PastaSauceRecipe/PastaSauceRecipe";
+import List from "../components/List/List";
 
 export default function LoginPage() {
   return (
     <>
-      <PastaSauceRecipe />
+      <List />
     </>
   );
 }

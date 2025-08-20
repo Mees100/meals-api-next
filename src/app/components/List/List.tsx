@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import MainInner from "../MainInner/MainInner";
-import styles from "./PastaSauceRecipe.module.scss";
+import styles from "./List.module.scss";
 import Link from "next/link";
 
 type Meal = {
@@ -33,7 +33,7 @@ async function getMeals(): Promise<MealList | undefined> {
     console.error(error);
   }
 }
-export default function PastaSauceRecipe() {
+export default function List() {
   const [data, setData] = useState<Meal[]>([]);
 
   useEffect(() => {
