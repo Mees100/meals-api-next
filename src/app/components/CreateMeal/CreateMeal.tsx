@@ -5,6 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import styles from "./CreateMeal.module.scss";
 import { getToken } from "../Login/utils";
 import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
 
 const url = "http://127.0.0.1:8000/meals";
 
@@ -84,11 +85,13 @@ export default function FormCreateMeal({
       <div className={styles.contactPage}>
         <div className={styles.contactForm}>
           {isLoggedIn ? (
-            <Alert severity="success">Je bent ingelogd</Alert>
+            <Stack sx={{ width: "100%" }}>
+              <Alert severity="success">Je bent ingelogd</Alert>
+            </Stack>
           ) : (
-            <div className={styles.messageInloggen}>
-              Let op, je moet eerst nog inloggen
-            </div>
+            <Stack sx={{ width: "100%" }}>
+              <Alert severity="info">Let op, je moet eerst nog inloggen</Alert>
+            </Stack>
           )}
           {message && <div className={styles.message}>{message}</div>}
           <Form action="/search" onSubmit={handleSubmit(onSubmit)}>
