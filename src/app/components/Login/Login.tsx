@@ -1,6 +1,5 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form";
-
 import { useState } from "react";
 import styles from "./Login.module.scss";
 import { setToken } from "./utils";
