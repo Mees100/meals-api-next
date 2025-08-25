@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import MainInner from "../MainInner/MainInner";
 import styles from "./List.module.scss";
 import Link from "next/link";
+import Typography from "@mui/material/Typography";
 
 type Meal = {
   name: string;
@@ -33,7 +34,7 @@ async function getMeals(): Promise<MealList | undefined> {
     console.error(error);
   }
 }
-export default function List() {
+export default function ListMeals() {
   const [data, setData] = useState<Meal[]>([]);
 
   useEffect(() => {
@@ -43,18 +44,21 @@ export default function List() {
   }, []);
 
   const listItems = data.map((item) => (
-    <li key={item.slug}>
-      <Link href={`meal/${item.slug}`}>{item.name}</Link>
-    </li>
+    <div key={item.slug}>
+      <Typography variant="h5" component="h2" gutterBottom>
+        {item.name}
+      </Typography>
+      <p>{item.description}</p>
+      <Link href={`meal/${item.slug}`}>Lees meer</Link>
+    </div>
   ));
+
   return (
     <>
       <MainInner>
         <div className={styles.container}>
           <h1>Maaltijden - async GET request</h1>
-          <div className={styles.listRecipe}>
-            <ul>{listItems}</ul>
-          </div>
+          <div className={styles.listRecipe}>{listItems}</div>
         </div>
       </MainInner>
     </>
