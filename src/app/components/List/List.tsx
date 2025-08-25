@@ -3,9 +3,6 @@ import { useEffect, useState } from "react";
 import MainInner from "../MainInner/MainInner";
 import styles from "./List.module.scss";
 import Link from "next/link";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 
 type Meal = {
