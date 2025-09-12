@@ -19,4 +19,19 @@ describe("FormCreateMeal", () => {
     expect(infoAlert).toBeInTheDocument();
     expect(successAlert).not.toBeInTheDocument();
   });
+
+  it("should show creatmeal form", () => {
+    render(<FormCreateMeal isLoggedIn />);
+    const inputNaam = screen.getByLabelText("naam");
+    const inputIngrediënten = screen.getByLabelText("ingrediënten");
+    const inputBeschrijving = screen.getByLabelText(
+      "beschrijving (minstens 5 letters)"
+    );
+    const inputKenmerk = screen.getByLabelText("kenmerk(slug)");
+
+    expect(inputNaam).toBeInTheDocument();
+    expect(inputIngrediënten).toBeInTheDocument();
+    expect(inputBeschrijving).toBeInTheDocument();
+    expect(inputKenmerk).toBeInTheDocument();
+  });
 });
