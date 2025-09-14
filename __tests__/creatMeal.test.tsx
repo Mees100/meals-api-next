@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import FormCreateMeal from "@/app/components/CreateMeal/CreateMeal";
+import fetchMock from "jest-fetch-mock";
 
 describe("FormCreateMeal", () => {
   it("shows success-alert if user is log in", () => {
@@ -35,11 +36,11 @@ describe("FormCreateMeal", () => {
     expect(inputKenmerk).toBeInTheDocument();
   });
 
-  describe("Login", () => {
-    it("renders button with text", () => {
-      render(<FormCreateMeal isLoggedIn />);
-      const button = screen.getByText("Opslaan");
-      expect(button).toBeInTheDocument();
-    });
+  it("shows button opslaan", () => {
+    render(<FormCreateMeal isLoggedIn />);
+    const button = screen.getByText("Opslaan");
+    expect(button).toBeInTheDocument();
   });
+
+  it("", () => {});
 });
