@@ -34,4 +34,12 @@ describe("FormCreateMeal", () => {
     expect(inputBeschrijving).toBeInTheDocument();
     expect(inputKenmerk).toBeInTheDocument();
   });
+
+  describe("Login", () => {
+    it("renders button with text", () => {
+      render(<FormCreateMeal isLoggedIn />);
+      const button = screen.getByText("Opslaan");
+      expect(button).toBeInTheDocument();
+    });
+  });
 });
