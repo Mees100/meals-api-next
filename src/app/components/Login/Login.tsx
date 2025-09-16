@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 import styles from "./Login.module.scss";
 import { setToken } from "./utils";
+import Button from "@mui/material/Button";
 
 type TokenResponse = {
   access_token: string;
@@ -63,13 +64,14 @@ export default function Login({ onLogin }: LoginProps) {
 
   return (
     <div className={styles.container}>
-      <button
+      <Button
         className={styles.btnModalOpen}
         onClick={() => setShowModal(true)}
         data-testid="btnModalOpen"
+        variant="contained"
       >
         Inloggen
-      </button>
+      </Button>
       {showModal && (
         <div className={styles.modalWrapper}>
           <div className={styles.modal}>
