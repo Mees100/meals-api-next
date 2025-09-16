@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import FormCreateMeal from "@/app/components/CreateMeal/CreateMeal";
 import fetchMock from "jest-fetch-mock";
@@ -8,7 +8,6 @@ describe("FormCreateMeal", () => {
     render(<FormCreateMeal isLoggedIn={true} />);
     const successAlert = screen.getByText("Je bent ingelogd");
     const infoAlert = screen.queryByText("Let op, je moet eerst nog inloggen");
-
     expect(successAlert).toBeInTheDocument();
     expect(infoAlert).not.toBeInTheDocument();
   });
@@ -29,7 +28,6 @@ describe("FormCreateMeal", () => {
       "beschrijving (minstens 5 letters)"
     );
     const inputKenmerk = screen.getByLabelText("kenmerk(slug)");
-
     expect(inputNaam).toBeInTheDocument();
     expect(inputIngrediënten).toBeInTheDocument();
     expect(inputBeschrijving).toBeInTheDocument();
@@ -41,6 +39,57 @@ describe("FormCreateMeal", () => {
     const button = screen.getByText("Opslaan");
     expect(button).toBeInTheDocument();
   });
+});
 
-  it("", () => {});
+describe("FormCreateMeal POST request", () => {
+  beforeEach(() => {
+    fetchMock.resetMocks();
+  });
+
+  it("sends POST request and shows success message", async () => {
+    fetchMock.mockResponses([
+      JSON.stringify({
+        name: "mocked data",
+        ingrediënten: ["mocked data", "mocked data"],
+      }),
+      { status: 200 },
+    ]);
+    render(<FormCreateMeal isLoggedIn={true} />);
+
+    fireEvent.change(screen.getByLabelText("naam"), {
+      target: { value: "Pizza" },
+    });
+    fireEvent.change(screen.getByLabelText("ingrediënten"), {
+      target: { value: "kaas, tomaat" },
+    });
+    fireEvent.change(
+      screen.getByLabelText("beschrijving (minstens 5 letters)"),
+      { target: { value: "Lekkere pizza" } }
+    );
+    fireEvent.change(screen.getByLabelText("kenmerk(slug)"), {
+      target: { value: "pizza" },
+    });
+
+    fireEvent.click(screen.getByText("Opslaan"));
+
+    await waitFor(() => {
+      expect(fetchMock).toHaveBeenCalledWith(
+        expect.stringContaining("/meals"),
+        expect.objectContaining({
+          method: "POST",
+          headers: expect.objectContaining({
+            "Content-type": "application/json",
+            Authorization: expect.stringContaining("Bearer"),
+          }),
+          body: JSON.stringify({
+            name: "Pizza",
+            ingredients: ["kaas", "tomaat"],
+            description: "Lekkere pizza",
+            slug: "pizza",
+          }),
+        })
+      );
+    });
+    expect(await screen.findByText("Het is gelukt")).toBeInTheDocument();
+  });
 });
