@@ -48,6 +48,7 @@ export default function Login({ onLogin }: LoginProps) {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) =>
     getToken(data.username, data.password).then((t) => {
@@ -84,7 +85,7 @@ export default function Login({ onLogin }: LoginProps) {
                 <input
                   type="email"
                   placeholder="email"
-                  {...register("username")}
+                  {...register("username", { required: true })}
                   required
                 />
               </div>
@@ -101,7 +102,13 @@ export default function Login({ onLogin }: LoginProps) {
               <button type="submit" data-testid="modalInloggen">
                 Inloggen
               </button>
-              <button type="button" onClick={() => setShowModal(false)}>
+              <button
+                type="button"
+                onClick={() => {
+                  reset();
+                  setShowModal(false);
+                }}
+              >
                 Annuleren
               </button>
             </form>
