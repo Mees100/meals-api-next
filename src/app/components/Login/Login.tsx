@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 import styles from "./Login.module.scss";
 import { setToken } from "./utils";
+import Button from "@mui/material/Button";
 
 type TokenResponse = {
   access_token: string;
@@ -47,6 +48,7 @@ export default function Login({ onLogin }: LoginProps) {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) =>
     getToken(data.username, data.password).then((t) => {
@@ -63,13 +65,14 @@ export default function Login({ onLogin }: LoginProps) {
 
   return (
     <div className={styles.container}>
-      <button
+      <Button
         className={styles.btnModalOpen}
         onClick={() => setShowModal(true)}
         data-testid="btnModalOpen"
+        variant="contained"
       >
         Inloggen
-      </button>
+      </Button>
       {showModal && (
         <div className={styles.modalWrapper}>
           <div className={styles.modal}>
@@ -82,7 +85,7 @@ export default function Login({ onLogin }: LoginProps) {
                 <input
                   type="email"
                   placeholder="email"
-                  {...register("username")}
+                  {...register("username", { required: true })}
                   required
                 />
               </div>
@@ -99,7 +102,13 @@ export default function Login({ onLogin }: LoginProps) {
               <button type="submit" data-testid="modalInloggen">
                 Inloggen
               </button>
-              <button type="button" onClick={() => setShowModal(false)}>
+              <button
+                type="button"
+                onClick={() => {
+                  reset();
+                  setShowModal(false);
+                }}
+              >
                 Annuleren
               </button>
             </form>
