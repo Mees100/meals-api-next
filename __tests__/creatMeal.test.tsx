@@ -4,7 +4,7 @@ import FormCreateMeal from "@/app/components/CreateMeal/CreateMeal";
 import fetchMock from "jest-fetch-mock";
 
 describe("FormCreateMeal", () => {
-  it("shows success-alert if user is log in", () => {
+  it("shows success-alert if user is logged in", () => {
     render(<FormCreateMeal isLoggedIn={true} />);
     const successAlert = screen.getByText("Je bent ingelogd");
     const infoAlert = screen.queryByText("Let op, je moet eerst nog inloggen");
@@ -12,7 +12,7 @@ describe("FormCreateMeal", () => {
     expect(infoAlert).not.toBeInTheDocument();
   });
 
-  it("shows info-alert if user is not log in", () => {
+  it("shows info-alert if user is not logged in", () => {
     render(<FormCreateMeal isLoggedIn={false} />);
     const infoAlert = screen.getByText("Let op, je moet eerst nog inloggen");
     const successAlert = screen.queryByText("Je bent ingelogd");
@@ -20,16 +20,16 @@ describe("FormCreateMeal", () => {
     expect(successAlert).not.toBeInTheDocument();
   });
 
-  it("should show creatmeal form", () => {
+  it("should show createmeal form fields", () => {
     render(<FormCreateMeal isLoggedIn />);
     const inputNaam = screen.getByLabelText("naam");
-    const inputIngrediënten = screen.getByLabelText("ingrediënten");
+    const inputIngredienten = screen.getByLabelText("ingrediënten");
     const inputBeschrijving = screen.getByLabelText(
       "beschrijving (minstens 5 letters)"
     );
     const inputKenmerk = screen.getByLabelText("kenmerk(slug)");
     expect(inputNaam).toBeInTheDocument();
-    expect(inputIngrediënten).toBeInTheDocument();
+    expect(inputIngredienten).toBeInTheDocument();
     expect(inputBeschrijving).toBeInTheDocument();
     expect(inputKenmerk).toBeInTheDocument();
   });
