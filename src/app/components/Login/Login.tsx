@@ -39,17 +39,70 @@ type Inputs = {
   password: string;
 };
 
-type LoginProps = {
-  onLogin: () => void;
-};
+type OnSubmitType = (data: Inputs) => void;
 
-export default function Login({ onLogin }: LoginProps) {
+function LoginModal({
+  onSubmit,
+  hideModal,
+}: {
+  onSubmit: OnSubmitType;
+  hideModal: () => void;
+}) {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm<Inputs>();
+  return (
+    <div className={styles.modalWrapper}>
+      <div className={styles.modal}>
+        <div className={styles.modalTitle}>
+          <h2>Inloggen</h2>
+        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className={styles.inputGroup}>
+            <label>naam</label>
+            <input
+              type="email"
+              placeholder="email"
+              {...register("username", { required: true })}
+              required
+            />
+          </div>
+          <div className={styles.inputGroup}>
+            <label>wachtwoord</label>
+            <input
+              type="password"
+              placeholder="password"
+              {...register("password", { required: true })}
+              required
+            />
+            {errors.password && <span>Dit veld is verplicht</span>}
+          </div>
+          <button type="submit" data-testid="modalInloggen">
+            Inloggen
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              reset();
+              hideModal();
+            }}
+          >
+            Annuleren
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+type LoginProps = {
+  onLogin: () => void;
+};
+
+export default function Login({ onLogin }: LoginProps) {
   const onSubmit: SubmitHandler<Inputs> = (data) =>
     getToken(data.username, data.password).then((t) => {
       if (t !== undefined) {
@@ -74,46 +127,7 @@ export default function Login({ onLogin }: LoginProps) {
         Inloggen
       </Button>
       {showModal && (
-        <div className={styles.modalWrapper}>
-          <div className={styles.modal}>
-            <div className={styles.modalTitle}>
-              <h2>Inloggen</h2>
-            </div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className={styles.inputGroup}>
-                <label>naam</label>
-                <input
-                  type="email"
-                  placeholder="email"
-                  {...register("username", { required: true })}
-                  required
-                />
-              </div>
-              <div className={styles.inputGroup}>
-                <label>wachtwoord</label>
-                <input
-                  type="password"
-                  placeholder="password"
-                  {...register("password", { required: true })}
-                  required
-                />
-                {errors.password && <span>Dit veld is verplicht</span>}
-              </div>
-              <button type="submit" data-testid="modalInloggen">
-                Inloggen
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  reset();
-                  setShowModal(false);
-                }}
-              >
-                Annuleren
-              </button>
-            </form>
-          </div>
-        </div>
+        <LoginModal onSubmit={onSubmit} hideModal={() => setShowModal(false)} />
       )}
     </div>
   );
