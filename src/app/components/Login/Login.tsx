@@ -4,6 +4,7 @@ import { useState } from "react";
 import styles from "./Login.module.scss";
 import { setToken } from "./utils";
 import Button from "@mui/material/Button";
+import { styled } from "@mui/material";
 
 type TokenResponse = {
   access_token: string;
@@ -54,46 +55,55 @@ function LoginModal({
     formState: { errors },
     reset,
   } = useForm<Inputs>();
+
+  const MyComponent = styled("div")(({ theme }) => [
+    {
+      backgroundColor: theme.palette.background.default,
+      width: "50%",
+    },
+  ]);
   return (
     <div className={styles.modalWrapper}>
-      <div className={styles.modal}>
-        <div className={styles.modalTitle}>
-          <h2>Inloggen</h2>
+      <MyComponent>
+        <div className={styles.modal}>
+          <div className={styles.modalTitle}>
+            <h2>Inloggen</h2>
+          </div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className={styles.inputGroup}>
+              <label>naam</label>
+              <input
+                type="email"
+                placeholder="email"
+                {...register("username", { required: true })}
+                required
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>wachtwoord</label>
+              <input
+                type="password"
+                placeholder="password"
+                {...register("password", { required: true })}
+                required
+              />
+              {errors.password && <span>Dit veld is verplicht</span>}
+            </div>
+            <button type="submit" data-testid="modalInloggen">
+              Inloggen
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                reset();
+                hideModal();
+              }}
+            >
+              Annuleren
+            </button>
+          </form>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className={styles.inputGroup}>
-            <label>naam</label>
-            <input
-              type="email"
-              placeholder="email"
-              {...register("username", { required: true })}
-              required
-            />
-          </div>
-          <div className={styles.inputGroup}>
-            <label>wachtwoord</label>
-            <input
-              type="password"
-              placeholder="password"
-              {...register("password", { required: true })}
-              required
-            />
-            {errors.password && <span>Dit veld is verplicht</span>}
-          </div>
-          <button type="submit" data-testid="modalInloggen">
-            Inloggen
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              reset();
-              hideModal();
-            }}
-          >
-            Annuleren
-          </button>
-        </form>
-      </div>
+      </MyComponent>
     </div>
   );
 }
