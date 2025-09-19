@@ -4,6 +4,8 @@ import Navigation from "./components/Navigation/Navigation";
 import styles from "../styles/layout.module.scss";
 import type { Viewport } from "next";
 import { Roboto } from "next/font/google";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import theme from "@/theme";
 
 export const viewport: Viewport = {
   initialScale: 1,
@@ -27,10 +29,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="nl" className={`${roboto.variable}`}>
+    <html lang="nl" className={roboto.variable}>
       <body className={styles.main}>
-        <Navigation />
-        {children}
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Navigation />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
